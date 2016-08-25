@@ -97,5 +97,9 @@ $(document).ready( function() {
   $("#resetButton").click(function () {
     $("#startPoint").show();
     $("#reset").hide();
+
+    roseDice = [];
+    $("#diceMany").val("");
+    $("#userInput").val("");
   });
 });
