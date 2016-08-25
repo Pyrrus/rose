@@ -49,44 +49,53 @@ var roseDice = [];
 
 function showImg() {
   $(".remove").remove();
-  console.log("INININININININININININ");
   for (var i = 0; i < roseDice.length; i++) {
-    $("#dice").html("<div class='col-md-1 remove'><img class='img-responsive' src='img/" + roseDice[i].imgSet() + "' alt='' /></div>");
+    $("#dice").append("<div class='col-md-1 remove'><img class='img-responsive' src='img/" + roseDice[i].imgSet() + "' alt='' /></div>");
   }
 }
+
+// User Interface Logic
 
 $(document).ready( function() {
 
   $("#start").click(function () {
-    $("#start").hide();
+    $("#startPoint").hide();
     $("#games").show();
     $("#dice").show();
 
-    var dice = new rose;
-    dice.roll();
-    roseDice.push(dice);
+    var howMany = $("#diceMany").val();
+
+    for (var i = 0; i < howMany; i++) {
+      var dice = new rose;
+      dice.roll();
+      roseDice.push(dice);
+    }
 
     showImg();
   });
 
-  $("#guess").submit(function (event) {
-    event.preventDefault();
 
-    
+  $("#guess").click(function () {
+    var input = parseInt($("#userInput").val());
 
-  })
+    var total = 0;
+
+    for (var i = 0; i < roseDice.length; i++) {
+      total += roseDice[i].total();
+    }
+
+    if (input === total) {
+      alert("you are right");
+      $("#games").hide();
+      $("#dice").hide();
+      $("#reset").show();
+    } else {
+      alert("NO");
+    }
+  });
+
+  $("#resetButton").click(function () {
+    $("#startPoint").show();
+    $("#reset").hide();
+  });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-// User Interface Logic
